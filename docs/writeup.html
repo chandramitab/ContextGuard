@@ -1,0 +1,245 @@
+<title>ContextGuard as Infrastructure</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root {
+    --ground:  #faf9f7;
+    --surface: #ffffff;
+    --sunk:    #f3f1ee;
+    --ink:     #21201c;
+    --muted:   #6f6b64;
+    --line:    #e3e0da;
+    --claude:  #eb6834;
+    --code:    #2a78d6;
+    --stop:    #d03b3b;
+    --serif: "Source Serif 4", Georgia, serif;
+    --sans:  "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #1a1917; --surface: #211f1d; --sunk: #262421;
+      --ink: #f2f0ec; --muted: #a5a099; --line: #343029;
+      --claude: #d95926; --code: #3987e5; --stop: #e07070;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #1a1917; --surface: #211f1d; --sunk: #262421;
+    --ink: #f2f0ec; --muted: #a5a099; --line: #343029;
+    --claude: #d95926; --code: #3987e5; --stop: #e07070;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); font-size: 16px; line-height: 1.7;
+  }
+  .page {
+    max-width: 720px; margin: 0 auto; padding: 56px 26px 90px;
+    display: flex; flex-direction: column; gap: 30px;
+  }
+
+  header { display: flex; flex-direction: column; gap: 10px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  h1 {
+    margin: 0; font-family: var(--serif); font-size: 38px; font-weight: 600;
+    line-height: 1.15; letter-spacing: -.015em; text-wrap: balance;
+  }
+  .standfirst { margin: 0; font-size: 18px; color: var(--muted); }
+
+  section { display: flex; flex-direction: column; gap: 12px; }
+  h2 {
+    margin: 0; font-family: var(--serif); font-size: 24px;
+    font-weight: 600; letter-spacing: -.01em;
+  }
+  p { margin: 0; }
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+  code {
+    font-family: var(--mono); font-size: .85em;
+    background: var(--sunk); padding: 1px 5px; border-radius: 4px;
+  }
+
+  /* the one figure: same field, two questions */
+  .pivot {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+    border-radius: 12px; overflow: hidden;
+  }
+  .pivot > div { background: var(--surface); padding: 18px 20px; }
+  .q { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .field { display: flex; justify-content: space-between; gap: 12px;
+           font-size: 14px; padding: 4px 0; }
+  .field + .field { border-top: 1px solid var(--line); }
+  .v { font-family: var(--mono); font-size: 11px; font-weight: 500; }
+  .v--out { color: var(--stop); }
+  .v--in  { color: var(--code); }
+
+  .flow {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12.5px;
+    background: var(--sunk); border-radius: 10px; padding: 16px 18px;
+  }
+  .flow b { font-weight: 500; }
+  .flow .c { color: var(--claude); }
+  .flow .d { color: var(--code); }
+  .flow .arr { color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { text-align: left; padding: 8px 0; border-bottom: 1px solid var(--line); }
+  th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+       text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  td:last-child, th:last-child { text-align: right; font-family: var(--mono); font-size: 13px; }
+  .bad { color: var(--stop); font-weight: 600; }
+
+  ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 9px; }
+  li::marker { color: var(--muted); font-family: var(--mono); font-size: 13px; }
+
+  .callout {
+    background: var(--sunk); border-radius: 10px; padding: 16px 20px;
+    font-size: 15px;
+  }
+  .callout p + p { margin-top: 8px; }
+  footer { color: var(--muted); font-size: 13.5px; border-top: 1px solid var(--line); padding-top: 18px; }
+  a { color: var(--code); }
+</style>
+
+<div class="page">
+  <header>
+    <div class="eyebrow">ContextGuard</div>
+    <h1>A privacy layer that knows what your task actually needs</h1>
+    <p class="standfirst">
+      Today it's an app. The plan is to make it a service other agents call —
+      the layer they go through, rather than one more thing competing with them.
+    </p>
+  </header>
+
+  <section>
+    <h2>The idea</h2>
+    <p>
+      Redaction tools ask "is this field sensitive?" That question has no good
+      answer, because the same field is sensitive or not depending on why you're
+      looking at it. ContextGuard asks a better one: <strong>does this task need
+      it?</strong>
+    </p>
+    <div class="pivot">
+      <div>
+        <div class="q">"Which item costs the most?"</div>
+        <div class="field"><span>Customer name</span><span class="v v--out">REMOVED</span></div>
+        <div class="field"><span>Bank account</span><span class="v v--out">REMOVED</span></div>
+        <div class="field"><span>Line items</span><span class="v v--in">KEPT</span></div>
+      </div>
+      <div>
+        <div class="q">"Which account do I pay?"</div>
+        <div class="field"><span>Customer name</span><span class="v v--out">REMOVED</span></div>
+        <div class="field"><span>Bank account</span><span class="v v--in">KEPT</span></div>
+        <div class="field"><span>Line items</span><span class="v v--in">KEPT</span></div>
+      </div>
+    </div>
+    <p>
+      Same invoice, same field, opposite decisions. That judgement is the part
+      only a model can make — and the part everything else is built around.
+    </p>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <div class="flow">
+      <b>your files</b> <span class="arr">→</span>
+      <b class="c">Claude decides what's private</b> <span class="arr">→</span>
+      <b class="d">code removes it</b> <span class="arr">→</span>
+      <b class="d">cleaned copy</b> <span class="arr">→</span>
+      <b class="c">Claude answers</b>
+    </div>
+    <p>
+      Two separate agents with a hard boundary between them. The first reads your
+      originals and produces a <em>plan</em> — never an answer. Deterministic code
+      then executes that plan: it black-boxes image regions, deletes glyphs from
+      PDFs outright rather than covering them, and strips metadata and annotations.
+      The second agent receives only the cleaned copy.
+    </p>
+    <p>
+      <strong>Claude judges; code enforces.</strong> Sensitivity needs judgement,
+      so a model decides it. Whether a file is allowed to leave is an invariant, so
+      plain code decides that — the same way every time, with no room for
+      persuasion. Anything the redactor can't fully clean is withheld entirely
+      rather than released half-done.
+    </p>
+    <p>
+      The enforcement is close to free: on a text-layer PDF the gate, locator and
+      redactor total <strong>18 ms</strong> — under a tenth of a percent of the run.
+      All the cost is the two model calls.
+    </p>
+  </section>
+
+  <section>
+    <h2>What's measured</h2>
+    <p>
+      An evaluation harness scores all six stages against ground truth across
+      29 tasks on invoices, HR records, banking forms and insurance claims.
+    </p>
+    <table>
+      <tr><th>Measure</th><th>Result</th></tr>
+      <tr><td>Correct answers from redacted context only</td><td>100%</td></tr>
+      <tr><td>Sensitive regions successfully located</td><td>100%</td></tr>
+      <tr><td>Task-required data preserved (no over-redaction)</td><td>100%</td></tr>
+      <tr><td>Runs with zero leakage</td><td class="bad">52%</td></tr>
+    </table>
+    <p>
+      The last number is the honest one. Every leak is the same class of thing —
+      project references, claim IDs, employee IDs. The model reads "sensitive" as
+      "personal data" and under-covers business identifiers. The fix is a hybrid
+      detector: regex finds pattern-matchable identifiers at near-perfect recall,
+      and the model is reserved for the necessity judgement it's uniquely good at.
+    </p>
+  </section>
+
+  <section>
+    <h2>The plan: become the layer, not the app</h2>
+    <p>
+      The valuable part isn't the answering agent — it's the sanitiser in the
+      middle. Exposed as an <strong>MCP server</strong>, it becomes a tool any
+      agent can call:
+    </p>
+    <div class="flow">
+      <b>any agent</b> <span class="arr">→</span>
+      <b>release_documents(files, task)</b> <span class="arr">→</span>
+      <b>cleaned content + the decisions made</b>
+    </div>
+    <p>
+      That inverts the risk. As agents gain outbound tools — databases, email,
+      chat — each becomes a place private data can escape to. An agent that reads
+      originals <em>and</em> holds those tools is one prompt injection away from
+      exfiltration. Routed through ContextGuard, the agent holding the tools never
+      possessed the sensitive data at all. It cannot leak what it never received.
+    </p>
+    <p>
+      The tool returns sanitised <em>content</em>, not file paths — so there is no
+      filesystem for a caller to walk back through, and the boundary holds by
+      construction rather than by instruction.
+    </p>
+  </section>
+
+  <section>
+    <h2>Getting there</h2>
+    <ol>
+      <li><strong>Close the coverage gap.</strong> Hybrid detection, then re-run the harness. 52% is not a number you expose across a tool boundary.</li>
+      <li><strong>Make the boundary structural.</strong> Delete the originals once the cleaned copy exists — closing both the sandbox gap and indefinite retention in one change.</li>
+      <li><strong>Extract the sanitiser.</strong> Split the pipeline so the redaction chain stands alone, answering optional. The existing app keeps working unchanged.</li>
+      <li><strong>Ship the MCP server.</strong> One tool, stdio transport, checked-in config so a team gets it on clone.</li>
+      <li><strong>Add destination awareness.</strong> The same document for the same question warrants different handling going to internal finance versus outside counsel.</li>
+    </ol>
+    <div class="callout">
+      <p><strong>The order matters.</strong> Steps 1 and 2 aren't features — they're the difference between a demo and something you'd point at real documents.</p>
+      <p>An MCP server built on a pipeline that leaks half the time doesn't contain the problem. It distributes it.</p>
+    </div>
+  </section>
+
+  <footer>
+    Built on the Claude Agent SDK. Evaluation harness, golden sets and per-stage
+    metrics live in <code>evaluation/</code>; every figure above is reproducible
+    with one command.
+  </footer>
+</div>

@@ -1,0 +1,173 @@
+{
+  "documents": [
+    {
+      "id": "invoice_classic.pdf",
+      "path": "data/pdfs/invoice_classic.pdf",
+      "kind": "pdf",
+      "pii": {
+        "person_name": "Elena Fischer",
+        "email": "elena.fischer@examplemail.de",
+        "phone": "+49 151 3200001",
+        "iban": "DE00 0000 0000 0001 1201 00",
+        "address": "Kaiserstrasse 17, 80801 Munich",
+        "project_ref": "ORION-47"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Hydraulic Pump - EUR 4,250.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DE00 0000 0000 0001 1201 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Elena Fischer",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_compact.pdf",
+      "path": "data/pdfs/invoice_compact.pdf",
+      "kind": "pdf",
+      "pii": {
+        "person_name": "Mira Schneider",
+        "email": "mira.schneider@examplemail.de",
+        "iban": "DE00 0000 0000 0003 1203 00",
+        "address": "Lindenallee 42, 50667 Cologne",
+        "project_ref": "ATLAS-9"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Industrial Camera - EUR 3,480.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DE00 0000 0000 0003 1203 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Mira Schneider",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_minimal.pdf",
+      "path": "data/pdfs/invoice_minimal.pdf",
+      "kind": "pdf",
+      "pii": {
+        "person_name": "Sophie Keller",
+        "email": "sophie.keller@examplemail.de",
+        "phone": "+49 151 3200005",
+        "iban": "DE00 0000 0000 0005 1205 00",
+        "address": "Bergweg 23, 90402 Nuremberg",
+        "project_ref": "MERIDIAN-12"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Actuator Unit - EUR 3,875.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DE00 0000 0000 0005 1205 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Sophie Keller",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_sidebar.pdf",
+      "path": "data/pdfs/invoice_sidebar.pdf",
+      "kind": "pdf",
+      "pii": {
+        "person_name": "Jonas Weber",
+        "email": "jonas.weber@examplemail.de",
+        "phone": "+49 151 3200002",
+        "iban": "DE00 0000 0000 0002 1202 00",
+        "address": "Rosenweg 8, 70173 Stuttgart",
+        "project_ref": "NOVA-21"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Vision Module - EUR 2,950.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DE00 0000 0000 0002 1202 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Jonas Weber",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_table.pdf",
+      "path": "data/pdfs/invoice_table.pdf",
+      "kind": "pdf",
+      "pii": {
+        "person_name": "Lukas Hartmann",
+        "email": "lukas.hartmann@examplemail.de",
+        "phone": "+49 151 3200004",
+        "iban": "DE00 0000 0000 0004 1204 00",
+        "address": "Parkstrasse 11, 60311 Frankfurt am Main",
+        "project_ref": "HELIOS-X"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Edge Controller - EUR 5,100.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DE00 0000 0000 0004 1204 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Lukas Hartmann",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    }
+  ]
+}

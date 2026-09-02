@@ -1,0 +1,302 @@
+[
+  {
+    "image": "banking_form_01.png",
+    "user_message": "What is the applicant's risk class?",
+    "expected_answer": "Low"
+  },
+  {
+    "image": "banking_form_01.png",
+    "user_message": "What IBAN is listed on this application?",
+    "expected_answer": "DEOO 0000 0000 0060 1260 00"
+  },
+  {
+    "image": "banking_form_01.png",
+    "user_message": "Who is the applicant?",
+    "expected_answer": "Laura König"
+  },
+  {
+    "image": "banking_form_02.png",
+    "user_message": "What is the applicant's risk class?",
+    "expected_answer": "Medium"
+  },
+  {
+    "image": "banking_form_02.png",
+    "user_message": "What IBAN is listed on this application?",
+    "expected_answer": "DEOO 0000 0000 0061 1261 00"
+  },
+  {
+    "image": "banking_form_02.png",
+    "user_message": "Who is the applicant?",
+    "expected_answer": "Tim Wagner"
+  },
+  {
+    "image": "banking_form_03.png",
+    "user_message": "What is the applicant's risk class?",
+    "expected_answer": "Low"
+  },
+  {
+    "image": "banking_form_03.png",
+    "user_message": "What IBAN is listed on this application?",
+    "expected_answer": "DEO 0000 0000 0062 1262 00"
+  },
+  {
+    "image": "banking_form_03.png",
+    "user_message": "Who is the applicant?",
+    "expected_answer": "Hannah Beck"
+  },
+  {
+    "image": "hr_form_01.png",
+    "user_message": "Which department does this employee work in?",
+    "expected_answer": "AI Engineering"
+  },
+  {
+    "image": "hr_form_01.png",
+    "user_message": "What is this employee's annual salary?",
+    "expected_answer": "65,000"
+  },
+  {
+    "image": "hr_form_01.png",
+    "user_message": "Who is this employee's manager?",
+    "expected_answer": "Emma Roth"
+  },
+  {
+    "image": "hr_form_02.png",
+    "user_message": "Which department does this employee work in?",
+    "expected_answer": "Finance"
+  },
+  {
+    "image": "hr_form_02.png",
+    "user_message": "What is this employee's annual salary?",
+    "expected_answer": "68,500"
+  },
+  {
+    "image": "hr_form_02.png",
+    "user_message": "Who is this employee's manager?",
+    "expected_answer": "Paul Lehmann"
+  },
+  {
+    "image": "hr_form_03.png",
+    "user_message": "Which department does this employee work in?",
+    "expected_answer": "Operations"
+  },
+  {
+    "image": "hr_form_03.png",
+    "user_message": "What is this employee's annual salary?",
+    "expected_answer": "72,000"
+  },
+  {
+    "image": "hr_form_03.png",
+    "user_message": "Who is this employee's manager?",
+    "expected_answer": "Clara Neumann"
+  },
+  {
+    "image": "hr_form_04.png",
+    "user_message": "Which department does this employee work in?",
+    "expected_answer": "Research"
+  },
+  {
+    "image": "hr_form_04.png",
+    "user_message": "What is this employee's annual salary?",
+    "expected_answer": "75,500"
+  },
+  {
+    "image": "hr_form_04.png",
+    "user_message": "Who is this employee's manager?",
+    "expected_answer": "Maximilian Frank"
+  },
+  {
+    "image": "hr_form_05.png",
+    "user_message": "Which department does this employee work in?",
+    "expected_answer": "Product"
+  },
+  {
+    "image": "hr_form_05.png",
+    "user_message": "What is this employee's annual salary?",
+    "expected_answer": "79,000"
+  },
+  {
+    "image": "hr_form_05.png",
+    "user_message": "Who is this employee's manager?",
+    "expected_answer": "Laura König"
+  },
+  {
+    "image": "insurance_claim_01.png",
+    "user_message": "What is the estimated damage amount?",
+    "expected_answer": "1,800"
+  },
+  {
+    "image": "insurance_claim_01.png",
+    "user_message": "What is the policy number?",
+    "expected_answer": "POL-550000"
+  },
+  {
+    "image": "insurance_claim_01.png",
+    "user_message": "What does the medical note say?",
+    "expected_answer": "Minor wrist sprain"
+  },
+  {
+    "image": "insurance_claim_02.png",
+    "user_message": "What is the estimated damage amount?",
+    "expected_answer": "2,525"
+  },
+  {
+    "image": "insurance_claim_02.png",
+    "user_message": "What is the policy number?",
+    "expected_answer": "POL-550001"
+  },
+  {
+    "image": "insurance_claim_02.png",
+    "user_message": "What does the medical note say?",
+    "expected_answer": "No injury reported"
+  },
+  {
+    "image": "insurance_claim_03.png",
+    "user_message": "What is the estimated damage amount?",
+    "expected_answer": "3,250"
+  },
+  {
+    "image": "insurance_claim_03.png",
+    "user_message": "What is the policy number?",
+    "expected_answer": "POL-550002"
+  },
+  {
+    "image": "insurance_claim_03.png",
+    "user_message": "What does the medical note say?",
+    "expected_answer": "Back pain reported"
+  },
+  {
+    "image": "insurance_claim_04.png",
+    "user_message": "What is the estimated damage amount?",
+    "expected_answer": "3,975"
+  },
+  {
+    "image": "insurance_claim_04.png",
+    "user_message": "What is the policy number?",
+    "expected_answer": "POL-550003"
+  },
+  {
+    "image": "insurance_claim_04.png",
+    "user_message": "What does the medical note say?",
+    "expected_answer": "Minor shoulder strain"
+  },
+  {
+    "image": "internal_business_01.png",
+    "user_message": "What is the approved budget?",
+    "expected_answer": "250,000"
+  },
+  {
+    "image": "internal_business_01.png",
+    "user_message": "Who is the project owner?",
+    "expected_answer": "Leon Schmitt"
+  },
+  {
+    "image": "internal_business_01.png",
+    "user_message": "What is the internal access reference?",
+    "expected_answer": "INT-900-X"
+  },
+  {
+    "image": "internal_business_02.png",
+    "user_message": "What is the approved budget?",
+    "expected_answer": "375,000"
+  },
+  {
+    "image": "internal_business_02.png",
+    "user_message": "Who is the project owner?",
+    "expected_answer": "Anna Lorenz"
+  },
+  {
+    "image": "internal_business_02.png",
+    "user_message": "What is the internal access reference?",
+    "expected_answer": "INT-901-X"
+  },
+  {
+    "image": "internal_business_03.png",
+    "user_message": "What is the approved budget?",
+    "expected_answer": "500,000"
+  },
+  {
+    "image": "internal_business_03.png",
+    "user_message": "Who is the project owner?",
+    "expected_answer": "Moritz Schwarz"
+  },
+  {
+    "image": "internal_business_03.png",
+    "user_message": "What is the internal access reference?",
+    "expected_answer": "INT-902-X"
+  },
+  {
+    "image": "invoice_01.png",
+    "user_message": "Which item has the highest price?",
+    "expected_answer": "Hydraulic Pump - EUR 4,250.00"
+  },
+  {
+    "image": "invoice_01.png",
+    "user_message": "What IBAN should this invoice be paid to?",
+    "expected_answer": "DEOO 0000 0000 0000 1200 00"
+  },
+  {
+    "image": "invoice_01.png",
+    "user_message": "Who is the invoice addressed to?",
+    "expected_answer": "Elena Fischer"
+  },
+  {
+    "image": "invoice_02.png",
+    "user_message": "Which item has the highest price?",
+    "expected_answer": "Vision Module - EUR 2,950.00"
+  },
+  {
+    "image": "invoice_02.png",
+    "user_message": "What IBAN should this invoice be paid to?",
+    "expected_answer": "DEOO 0000 0000 0001 1201 00"
+  },
+  {
+    "image": "invoice_02.png",
+    "user_message": "Who is the invoice addressed to?",
+    "expected_answer": "Jonas Weber"
+  },
+  {
+    "image": "invoice_03.png",
+    "user_message": "Which item has the highest price?",
+    "expected_answer": "Industrial Camera - EUR 3,480.00"
+  },
+  {
+    "image": "invoice_03.png",
+    "user_message": "What IBAN should this invoice be paid to?",
+    "expected_answer": "DEOO 0000 0000 0002 1202 00"
+  },
+  {
+    "image": "invoice_03.png",
+    "user_message": "Who is the invoice addressed to?",
+    "expected_answer": "Mira Schneider"
+  },
+  {
+    "image": "invoice_04.png",
+    "user_message": "Which item has the highest price?",
+    "expected_answer": "Edge Controller - EUR 5,100.00"
+  },
+  {
+    "image": "invoice_04.png",
+    "user_message": "What IBAN should this invoice be paid to?",
+    "expected_answer": "DEOO 0000 0000 0003 1203 00"
+  },
+  {
+    "image": "invoice_04.png",
+    "user_message": "Who is the invoice addressed to?",
+    "expected_answer": "Lukas Hartmann"
+  },
+  {
+    "image": "invoice_05.png",
+    "user_message": "Which item has the highest price?",
+    "expected_answer": "Actuator Unit - EUR 3,875.00"
+  },
+  {
+    "image": "invoice_05.png",
+    "user_message": "What IBAN should this invoice be paid to?",
+    "expected_answer": "DEOO 0000 0000 0004 1204 00"
+  },
+  {
+    "image": "invoice_05.png",
+    "user_message": "Who is the invoice addressed to?",
+    "expected_answer": "Sophie Keller"
+  }
+]

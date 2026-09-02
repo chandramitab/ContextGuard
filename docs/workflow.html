@@ -1,0 +1,348 @@
+<title>ContextGuard Trust Boundary</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+  :root {
+    --ground:  #faf9f7;
+    --surface: #ffffff;
+    --sunk:    #f3f1ee;
+    --ink:     #21201c;
+    --muted:   #6f6b64;
+    --line:    #e3e0da;
+    --claude:  #eb6834;   /* Claude reasons */
+    --code:    #2a78d6;   /* deterministic code enforces */
+    --stop:    #d03b3b;   /* blocked / withheld */
+    --serif: "Source Serif 4", Georgia, serif;
+    --sans:  "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:  #1a1917;
+      --surface: #211f1d;
+      --sunk:    #262421;
+      --ink:     #f2f0ec;
+      --muted:   #a5a099;
+      --line:    #343029;
+      --claude:  #d95926;
+      --code:    #3987e5;
+      --stop:    #e07070;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:  #1a1917;
+    --surface: #211f1d;
+    --sunk:    #262421;
+    --ink:     #f2f0ec;
+    --muted:   #a5a099;
+    --line:    #343029;
+    --claude:  #d95926;
+    --code:    #3987e5;
+    --stop:    #e07070;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .page {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 52px 26px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+  }
+
+  header { display: flex; flex-direction: column; gap: 10px; }
+
+  h1 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: -.015em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  .lede { margin: 0; max-width: 60ch; color: var(--muted); font-size: 16px; }
+
+  /* ── legend ────────────────────────────────────── */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; }
+  .key { display: flex; align-items: center; gap: 9px; font-size: 13.5px; }
+  .dot { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+  .dot--claude { background: var(--claude); }
+  .dot--code   { background: var(--code); }
+  .dash {
+    width: 22px; height: 0; flex: none;
+    border-top: 2px dashed var(--stop);
+  }
+
+  /* ── figure ────────────────────────────────────── */
+  figure {
+    margin: 0;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 22px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .scroll { overflow-x: auto; }
+  svg.flow { display: block; width: 100%; min-width: 820px; height: auto; }
+  figcaption { color: var(--muted); font-size: 13.5px; max-width: 74ch; }
+
+  .box        { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+  .box--claude{ stroke: var(--claude); stroke-width: 2; }
+  .box--code  { stroke: var(--code);   stroke-width: 2; }
+  .box-title  { fill: var(--ink); font-family: var(--sans); font-size: 15px; font-weight: 600; }
+  .box-sub    { fill: var(--muted); font-family: var(--sans); font-size: 12px; }
+  .role       { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: .1em; }
+  .role--claude { fill: var(--claude); }
+  .role--code   { fill: var(--code); }
+  .edge       { stroke: var(--ink); stroke-width: 1.6; fill: none; }
+  .zone       { fill: var(--muted); font-family: var(--sans); font-size: 11px;
+                font-weight: 600; letter-spacing: .1em; }
+  .divider    { stroke: var(--stop); stroke-width: 2.5; }
+  .divider-label { fill: var(--stop); font-family: var(--sans); font-size: 11px;
+                   font-weight: 600; letter-spacing: .12em; }
+  .blocked    { stroke: var(--stop); stroke-width: 1.6; stroke-dasharray: 7 5; fill: none; }
+  .stop-text  { fill: var(--stop); font-family: var(--sans); font-size: 12px; font-weight: 500; }
+  .cross      { stroke: var(--stop); stroke-width: 2.4; }
+  .held       { fill: var(--surface); stroke: var(--stop); stroke-width: 1.5; stroke-dasharray: 5 4; }
+
+  /* ── steps ─────────────────────────────────────── */
+  ol.steps {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+    border-radius: 12px; overflow: hidden;
+  }
+  ol.steps li {
+    background: var(--surface);
+    padding: 15px 20px;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .n {
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--muted);
+  }
+  .step-body { display: flex; flex-direction: column; gap: 2px; }
+  .step-body b { font-weight: 600; }
+  .step-body span { color: var(--muted); font-size: 14px; }
+  .who {
+    font-size: 10px; font-weight: 600; letter-spacing: .1em;
+    padding: 1px 7px; border-radius: 20px; align-self: flex-start;
+    margin-top: 3px;
+  }
+  .who--claude { color: var(--claude); background: color-mix(in srgb, var(--claude) 12%, transparent); }
+  .who--code   { color: var(--code);   background: color-mix(in srgb, var(--code) 12%, transparent); }
+
+  h2 {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 23px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+  }
+  section { display: flex; flex-direction: column; gap: 14px; }
+
+  /* Two columns so the four cards fill both rows — auto-fit would leave the
+     fourth stranded alone on a third row at this width. */
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--sunk);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .card h3 { margin: 0; font-size: 15px; font-weight: 600; }
+  .card p  { margin: 0; font-size: 14px; color: var(--muted); }
+</style>
+
+<div class="page">
+  <header>
+    <h1>Answer questions about a document without handing it over</h1>
+    <p class="lede">
+      ContextGuard sits between your files and the AI that answers about them.
+      Claude works out what is private; ordinary code does the removing. The
+      agent that answers you never receives the original.
+    </p>
+    <div class="legend">
+      <span class="key"><span class="dot dot--claude"></span> Claude decides</span>
+      <span class="key"><span class="dot dot--code"></span> Code enforces</span>
+      <span class="key"><span class="dash"></span> Never crosses</span>
+    </div>
+  </header>
+
+  <figure>
+    <div class="scroll">
+      <svg class="flow" viewBox="0 0 1180 330" role="img"
+           aria-label="Five steps left to right: you ask a question with your documents; Claude's Privacy Agent decides what is private; code redacts the files and holds back anything it cannot fully clean; a cleaned copy crosses the trust boundary; a second Claude agent reads only that copy and answers. A dashed line struck through at the boundary shows the originals never cross.">
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <text class="zone" x="22" y="26">YOUR SIDE — ORIGINALS LIVE HERE</text>
+        <text class="zone" x="742" y="26">THE AI'S SIDE — CLEANED COPIES ONLY</text>
+
+        <line class="divider" x1="712" y1="42" x2="712" y2="128" />
+        <line class="divider" x1="712" y1="186" x2="712" y2="292" />
+        <text class="divider-label" x="712" y="316" text-anchor="middle">TRUST BOUNDARY</text>
+
+        <!-- held back -->
+        <rect class="held" x="360" y="44" width="216" height="40" rx="7" />
+        <text class="stop-text" x="468" y="69" text-anchor="middle">Can't fully clean it? Held back.</text>
+        <path class="edge" d="M 468 118 L 468 90" marker-end="url(#ah)" />
+
+        <!-- 1. you ask -->
+        <rect class="box" x="22" y="118" width="158" height="78" rx="9" />
+        <text class="role"      x="38" y="139" style="fill: var(--muted)">STEP 1</text>
+        <text class="box-title" x="38" y="162">You ask</text>
+        <text class="box-sub"   x="38" y="181">a question + your files</text>
+
+        <path class="edge" d="M 180 157 L 216 157" marker-end="url(#ah)" />
+
+        <!-- 2. privacy agent -->
+        <rect class="box box--claude" x="218" y="118" width="170" height="78" rx="9" />
+        <text class="role role--claude" x="234" y="139">CLAUDE DECIDES</text>
+        <text class="box-title" x="234" y="162">What's private?</text>
+        <text class="box-sub"   x="234" y="181">and does this task need it?</text>
+
+        <path class="edge" d="M 388 157 L 424 157" marker-end="url(#ah)" />
+
+        <!-- 3. redaction -->
+        <rect class="box box--code" x="426" y="118" width="170" height="78" rx="9" />
+        <text class="role role--code" x="442" y="139">CODE ENFORCES</text>
+        <text class="box-title" x="442" y="162">Remove it</text>
+        <text class="box-sub"   x="442" y="181">black out, delete, verify</text>
+
+        <path class="edge" d="M 596 157 L 792 157" marker-end="url(#ah)" />
+        <text class="box-sub" x="694" y="180" text-anchor="middle">cleaned copy</text>
+
+        <!-- 4. task agent -->
+        <rect class="box box--claude" x="794" y="118" width="170" height="78" rx="9" />
+        <text class="role role--claude" x="810" y="139">CLAUDE ANSWERS</text>
+        <text class="box-title" x="810" y="162">Reads the copy</text>
+        <text class="box-sub"   x="810" y="181">never the original</text>
+
+        <path class="edge" d="M 964 157 L 1000 157" marker-end="url(#ah)" />
+
+        <!-- 5. answer -->
+        <rect class="box" x="1002" y="118" width="156" height="78" rx="9" />
+        <text class="role"      x="1018" y="139" style="fill: var(--muted)">STEP 5</text>
+        <text class="box-title" x="1018" y="162">Your answer</text>
+        <text class="box-sub"   x="1018" y="181">grounded in what it saw</text>
+
+        <!-- what never crosses -->
+        <path class="blocked" d="M 303 208 L 303 262 L 879 262 L 879 208" />
+        <line class="cross" x1="700" y1="250" x2="724" y2="274" />
+        <line class="cross" x1="724" y1="250" x2="700" y2="274" />
+        <text class="stop-text" x="480" y="256" text-anchor="middle">your original documents never cross</text>
+      </svg>
+    </div>
+    <figcaption>
+      Only a cleaned copy reaches the AI that answers you. If the system cannot
+      fully clean a document, it holds the whole document back rather than
+      release a half-redacted one.
+    </figcaption>
+  </figure>
+
+  <section>
+    <h2>What happens, step by step</h2>
+    <ol class="steps">
+      <li>
+        <span class="n">1</span>
+        <span class="step-body">
+          <b>You upload files and ask a question.</b>
+          <span>PDFs or images — an invoice, a claim form, an HR record. Several at once is fine.</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">2</span>
+        <span class="step-body">
+          <b>Claude reads the originals and decides what's private.</b>
+          <span>Not just "is this a name" but "does <em>this question</em> actually need it?" Two different questions about the same invoice produce two different answers.</span>
+          <span class="who who--claude">CLAUDE DECIDES</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">3</span>
+        <span class="step-body">
+          <b>Code does the removing — not Claude.</b>
+          <span>Images get blacked out. In PDFs the text is deleted outright, not covered over, so it can't be copied out later. Then it checks its own work.</span>
+          <span class="who who--code">CODE ENFORCES</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">4</span>
+        <span class="step-body">
+          <b>A cleaned copy is written to a separate place.</b>
+          <span>The originals stay behind. Anything that couldn't be fully cleaned is held back entirely.</span>
+          <span class="who who--code">CODE ENFORCES</span>
+        </span>
+      </li>
+      <li>
+        <span class="n">5</span>
+        <span class="step-body">
+          <b>A second Claude answers using only that copy.</b>
+          <span>It has no access to the originals, so it cannot reveal what was removed — even if asked directly.</span>
+          <span class="who who--claude">CLAUDE ANSWERS</span>
+        </span>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Why it's built this way</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Why two Claudes instead of one?</h3>
+        <p>
+          The one that reads your private documents doesn't answer you. The one
+          that answers never sees them. Nothing can slip out by accident, because
+          the part talking to you never had it.
+        </p>
+      </div>
+      <div class="card">
+        <h3>The same detail isn't always private</h3>
+        <p>
+          Ask "which item costs the most?" and the bank account is hidden. Ask
+          "which account do I pay?" and it's kept. What counts as private depends
+          on what you asked.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Claude judges, code enforces</h3>
+        <p>
+          Deciding what's sensitive needs judgement, so Claude does it. Deciding
+          what's allowed to leave is a rule, so plain code does it — the same way
+          every time, with no room for persuasion.
+        </p>
+      </div>
+      <div class="card">
+        <h3>When unsure, nothing goes out</h3>
+        <p>
+          If the system can't confirm it removed everything it meant to, it holds
+          the whole document back and says so. Releasing nothing beats releasing
+          something half-cleaned.
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

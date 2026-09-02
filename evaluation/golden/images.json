@@ -1,0 +1,734 @@
+{
+  "documents": [
+    {
+      "id": "banking_form_01.png",
+      "path": "data/images/banking_form_01.png",
+      "kind": "image",
+      "family": "banking_form",
+      "pii": {
+        "person_name": "Laura König",
+        "email": "laura.konig.60@examplemail.de",
+        "phone": "+49 151 3200060",
+        "passport": "XK0000060",
+        "iban": "DEOO 0000 0000 0060 1260 00",
+        "address": "KaiserstraBe 17, 80801 Munchen",
+        "dob": "02.03.1994",
+        "card_no": "4111 1111 1111 1111"
+      },
+      "tasks": [
+        {
+          "question": "What is the applicant's risk class?",
+          "expected_answer": "Low",
+          "requires": []
+        },
+        {
+          "question": "What IBAN is listed on this application?",
+          "expected_answer": "DEOO 0000 0000 0060 1260 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the applicant?",
+          "expected_answer": "Laura König",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "banking_form_02.png",
+      "path": "data/images/banking_form_02.png",
+      "kind": "image",
+      "family": "banking_form",
+      "pii": {
+        "person_name": "Tim Wagner",
+        "email": "tim.wagner.61@examplemail.de",
+        "phone": "+49 151 3200061",
+        "passport": "XK0000061",
+        "iban": "DEOO 0000 0000 0061 1261 00",
+        "address": "Rosenweg 8, 70173 Stuttgart",
+        "dob": "03.04.1995",
+        "card_no": "4111 1111 11111111"
+      },
+      "tasks": [
+        {
+          "question": "What is the applicant's risk class?",
+          "expected_answer": "Medium",
+          "requires": []
+        },
+        {
+          "question": "What IBAN is listed on this application?",
+          "expected_answer": "DEOO 0000 0000 0061 1261 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the applicant?",
+          "expected_answer": "Tim Wagner",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "banking_form_03.png",
+      "path": "data/images/banking_form_03.png",
+      "kind": "image",
+      "family": "banking_form",
+      "pii": {
+        "person_name": "Hannah Beck",
+        "email": "beck.62@examplemail.de",
+        "phone": "+49 151 3200062",
+        "passport": "XK0000062",
+        "iban": "DEO 0000 0000 0062 1262 00",
+        "address": "Lindenallee 42, 50667 KéiIn Date",
+        "dob": "04.05.1996",
+        "card_no": "4111 1111 11111111"
+      },
+      "tasks": [
+        {
+          "question": "What is the applicant's risk class?",
+          "expected_answer": "Low",
+          "requires": []
+        },
+        {
+          "question": "What IBAN is listed on this application?",
+          "expected_answer": "DEO 0000 0000 0062 1262 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the applicant?",
+          "expected_answer": "Hannah Beck",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hr_form_01.png",
+      "path": "data/images/hr_form_01.png",
+      "kind": "image",
+      "family": "hr_form",
+      "pii": {
+        "person_name": "Noah Berger",
+        "manager": "Emma Roth",
+        "salary": "65,000",
+        "employee_id": "EMP-7320",
+        "email": "noah.berger.20@examplemail.de",
+        "phone": "+49 151 3200020",
+        "passport": "XK0000020",
+        "iban": "DEOO 0000 0000 0020 1220 00",
+        "address": "KaiserstraBe 17, 80801 Munchen EMAIL",
+        "dob": "10.01.1992"
+      },
+      "tasks": [
+        {
+          "question": "Which department does this employee work in?",
+          "expected_answer": "AI Engineering",
+          "requires": []
+        },
+        {
+          "question": "What is this employee's annual salary?",
+          "expected_answer": "65,000",
+          "requires": [
+            "salary"
+          ]
+        },
+        {
+          "question": "Who is this employee's manager?",
+          "expected_answer": "Emma Roth",
+          "requires": [
+            "manager"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hr_form_02.png",
+      "path": "data/images/hr_form_02.png",
+      "kind": "image",
+      "family": "hr_form",
+      "pii": {
+        "person_name": "Lea Hoffmann",
+        "manager": "Paul Lehmann",
+        "salary": "68,500",
+        "employee_id": "EMP-7321",
+        "email": "lea.hoffmann.21@examplemail.de",
+        "phone": "+49 151 3200021",
+        "passport": "XK0000021",
+        "iban": "DEOO 0000 0000 0021 1221 00",
+        "address": "Rosenweg 8, 70173 Stuttgart",
+        "dob": "11.02.1993"
+      },
+      "tasks": [
+        {
+          "question": "Which department does this employee work in?",
+          "expected_answer": "Finance",
+          "requires": []
+        },
+        {
+          "question": "What is this employee's annual salary?",
+          "expected_answer": "68,500",
+          "requires": [
+            "salary"
+          ]
+        },
+        {
+          "question": "Who is this employee's manager?",
+          "expected_answer": "Paul Lehmann",
+          "requires": [
+            "manager"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hr_form_03.png",
+      "path": "data/images/hr_form_03.png",
+      "kind": "image",
+      "family": "hr_form",
+      "pii": {
+        "person_name": "Felix Braun",
+        "manager": "Clara Neumann",
+        "salary": "72,000",
+        "employee_id": "EMP-7322",
+        "email": "felix.braun.22@examplemail.de",
+        "phone": "+49 151 3200022",
+        "passport": "XK0000022",
+        "iban": "DEOO 0000 0000 0022 1222 00",
+        "address": "Lindenallee 42, 50667 KG6In",
+        "dob": "12.03.1994"
+      },
+      "tasks": [
+        {
+          "question": "Which department does this employee work in?",
+          "expected_answer": "Operations",
+          "requires": []
+        },
+        {
+          "question": "What is this employee's annual salary?",
+          "expected_answer": "72,000",
+          "requires": [
+            "salary"
+          ]
+        },
+        {
+          "question": "Who is this employee's manager?",
+          "expected_answer": "Clara Neumann",
+          "requires": [
+            "manager"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hr_form_04.png",
+      "path": "data/images/hr_form_04.png",
+      "kind": "image",
+      "family": "hr_form",
+      "pii": {
+        "person_name": "Nina Vogt",
+        "manager": "Maximilian Frank",
+        "salary": "75,500",
+        "employee_id": "EMP-7323",
+        "email": "nina.vogt.23@examplemail.de",
+        "phone": "+49 151 3200023",
+        "passport": "XK0000023",
+        "iban": "DE0O 0000 0000 0023 1223 00",
+        "address": "ParkstraBe 11, 60311 Frankfurt",
+        "dob": "13.04.1995"
+      },
+      "tasks": [
+        {
+          "question": "Which department does this employee work in?",
+          "expected_answer": "Research",
+          "requires": []
+        },
+        {
+          "question": "What is this employee's annual salary?",
+          "expected_answer": "75,500",
+          "requires": [
+            "salary"
+          ]
+        },
+        {
+          "question": "Who is this employee's manager?",
+          "expected_answer": "Maximilian Frank",
+          "requires": [
+            "manager"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hr_form_05.png",
+      "path": "data/images/hr_form_05.png",
+      "kind": "image",
+      "family": "hr_form",
+      "pii": {
+        "person_name": "David Krüger",
+        "manager": "Laura König",
+        "salary": "79,000",
+        "employee_id": "EMP-7324",
+        "email": "kruger.24@examplemail.de",
+        "phone": "+49 151 3200024",
+        "passport": "XK0000024",
+        "iban": "DEOO 0000 0000 0024 1224 00",
+        "address": "Bergweg 23, 90402 Nurnberg",
+        "dob": "14.05.1996"
+      },
+      "tasks": [
+        {
+          "question": "Which department does this employee work in?",
+          "expected_answer": "Product",
+          "requires": []
+        },
+        {
+          "question": "What is this employee's annual salary?",
+          "expected_answer": "79,000",
+          "requires": [
+            "salary"
+          ]
+        },
+        {
+          "question": "Who is this employee's manager?",
+          "expected_answer": "Laura König",
+          "requires": [
+            "manager"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "insurance_claim_01.png",
+      "path": "data/images/insurance_claim_01.png",
+      "kind": "image",
+      "family": "insurance_claim",
+      "pii": {
+        "person_name": "Emma Roth",
+        "claim_id": "CLM-26-3000",
+        "policy_no": "POL-550000",
+        "medical_note": "Minor wrist sprain",
+        "email": "emma.roth.40@examplemail.de",
+        "phone": "+49 151 3200040",
+        "iban": "DEOO 0000 0000 0040 1240 00",
+        "address": "KaiserstraBe 17, 80801 Munchen Phone"
+      },
+      "tasks": [
+        {
+          "question": "What is the estimated damage amount?",
+          "expected_answer": "1,800",
+          "requires": []
+        },
+        {
+          "question": "What is the policy number?",
+          "expected_answer": "POL-550000",
+          "requires": [
+            "policy_no"
+          ]
+        },
+        {
+          "question": "What does the medical note say?",
+          "expected_answer": "Minor wrist sprain",
+          "requires": [
+            "medical_note"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "insurance_claim_02.png",
+      "path": "data/images/insurance_claim_02.png",
+      "kind": "image",
+      "family": "insurance_claim",
+      "pii": {
+        "person_name": "Paul Lehmann",
+        "claim_id": "CLM-26-3001",
+        "policy_no": "POL-550001",
+        "medical_note": "No injury reported",
+        "email": "paul.lehmann.41@examplemail.de",
+        "phone": "+49 151 3200041",
+        "iban": "DE00 0000 0000 0041 1241 00",
+        "address": "Rosenweg 8, 70173 Stuttgart Phone"
+      },
+      "tasks": [
+        {
+          "question": "What is the estimated damage amount?",
+          "expected_answer": "2,525",
+          "requires": []
+        },
+        {
+          "question": "What is the policy number?",
+          "expected_answer": "POL-550001",
+          "requires": [
+            "policy_no"
+          ]
+        },
+        {
+          "question": "What does the medical note say?",
+          "expected_answer": "No injury reported",
+          "requires": [
+            "medical_note"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "insurance_claim_03.png",
+      "path": "data/images/insurance_claim_03.png",
+      "kind": "image",
+      "family": "insurance_claim",
+      "pii": {
+        "person_name": "Clara Neumann",
+        "claim_id": "CLM-26-3002",
+        "policy_no": "POL-550002",
+        "medical_note": "Back pain reported",
+        "email": "clara.neumann.42@examplemail.de",
+        "phone": "+49 151 3200042",
+        "iban": "DEO 0000 0000 0042 1242 00",
+        "address": "Lindenallee 42, 50667 KéiIn Phone"
+      },
+      "tasks": [
+        {
+          "question": "What is the estimated damage amount?",
+          "expected_answer": "3,250",
+          "requires": []
+        },
+        {
+          "question": "What is the policy number?",
+          "expected_answer": "POL-550002",
+          "requires": [
+            "policy_no"
+          ]
+        },
+        {
+          "question": "What does the medical note say?",
+          "expected_answer": "Back pain reported",
+          "requires": [
+            "medical_note"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "insurance_claim_04.png",
+      "path": "data/images/insurance_claim_04.png",
+      "kind": "image",
+      "family": "insurance_claim",
+      "pii": {
+        "person_name": "Maximilian Frank",
+        "claim_id": "CLM-26-3003",
+        "policy_no": "POL-550003",
+        "medical_note": "Minor shoulder strain",
+        "email": "maximilian.frank.43@examplemail.de",
+        "phone": "+49 151 3200043",
+        "iban": "DEOO 0000 0000 0043 1243 00",
+        "address": "ParkstraBe 11, 60311 Frankfurt"
+      },
+      "tasks": [
+        {
+          "question": "What is the estimated damage amount?",
+          "expected_answer": "3,975",
+          "requires": []
+        },
+        {
+          "question": "What is the policy number?",
+          "expected_answer": "POL-550003",
+          "requires": [
+            "policy_no"
+          ]
+        },
+        {
+          "question": "What does the medical note say?",
+          "expected_answer": "Minor shoulder strain",
+          "requires": [
+            "medical_note"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "internal_business_01.png",
+      "path": "data/images/internal_business_01.png",
+      "kind": "image",
+      "family": "internal_business",
+      "pii": {
+        "person_name": "Leon Schmitt",
+        "client_alias": "ALPHA",
+        "access_ref": "INT-900-X",
+        "employee_id": "EMP-7380",
+        "email": "leon.schmitt.80@examplemail.de"
+      },
+      "tasks": [
+        {
+          "question": "What is the approved budget?",
+          "expected_answer": "250,000",
+          "requires": []
+        },
+        {
+          "question": "Who is the project owner?",
+          "expected_answer": "Leon Schmitt",
+          "requires": [
+            "person_name"
+          ]
+        },
+        {
+          "question": "What is the internal access reference?",
+          "expected_answer": "INT-900-X",
+          "requires": [
+            "access_ref"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "internal_business_02.png",
+      "path": "data/images/internal_business_02.png",
+      "kind": "image",
+      "family": "internal_business",
+      "pii": {
+        "person_name": "Anna Lorenz",
+        "client_alias": "BETA",
+        "access_ref": "INT-901-X",
+        "employee_id": "EMP-7381",
+        "email": "anna.lorenz.81@examplemail.de"
+      },
+      "tasks": [
+        {
+          "question": "What is the approved budget?",
+          "expected_answer": "375,000",
+          "requires": []
+        },
+        {
+          "question": "Who is the project owner?",
+          "expected_answer": "Anna Lorenz",
+          "requires": [
+            "person_name"
+          ]
+        },
+        {
+          "question": "What is the internal access reference?",
+          "expected_answer": "INT-901-X",
+          "requires": [
+            "access_ref"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "internal_business_03.png",
+      "path": "data/images/internal_business_03.png",
+      "kind": "image",
+      "family": "internal_business",
+      "pii": {
+        "person_name": "Moritz Schwarz",
+        "client_alias": "GAMMA",
+        "access_ref": "INT-902-X",
+        "employee_id": "EMP-7382",
+        "email": "moritz.schwarz.82@examplemail.de"
+      },
+      "tasks": [
+        {
+          "question": "What is the approved budget?",
+          "expected_answer": "500,000",
+          "requires": []
+        },
+        {
+          "question": "Who is the project owner?",
+          "expected_answer": "Moritz Schwarz",
+          "requires": [
+            "person_name"
+          ]
+        },
+        {
+          "question": "What is the internal access reference?",
+          "expected_answer": "INT-902-X",
+          "requires": [
+            "access_ref"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_01.png",
+      "path": "data/images/invoice_01.png",
+      "kind": "image",
+      "family": "invoice",
+      "pii": {
+        "person_name": "Elena Fischer",
+        "project_ref": "ORION-47",
+        "customer_id": "C-92000",
+        "email": "elena.fischer.00@examplemail.de",
+        "iban": "DEOO 0000 0000 0000 1200 00",
+        "address": "KaiserstraBe 17, 80801 Munchen Email"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Hydraulic Pump - EUR 4,250.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DEOO 0000 0000 0000 1200 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Elena Fischer",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_02.png",
+      "path": "data/images/invoice_02.png",
+      "kind": "image",
+      "family": "invoice",
+      "pii": {
+        "person_name": "Jonas Weber",
+        "project_ref": "NOVA-21",
+        "customer_id": "C-92001",
+        "email": "jonas.weber.01@examplemail.de",
+        "iban": "DEOO 0000 0000 0001 1201 00",
+        "address": "Rosenweg 8, 70173 Stuttgargervo Motor"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Vision Module - EUR 2,950.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DEOO 0000 0000 0001 1201 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Jonas Weber",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_03.png",
+      "path": "data/images/invoice_03.png",
+      "kind": "image",
+      "family": "invoice",
+      "pii": {
+        "person_name": "Mira Schneider",
+        "project_ref": "ATLAS-9",
+        "email": "mira.schneider.02@examplemail.de",
+        "iban": "DEOO 0000 0000 0002 1202 00",
+        "address": "Lindenallee 42, 50667 KG6In Email"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Industrial Camera - EUR 3,480.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DEOO 0000 0000 0002 1202 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Mira Schneider",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_04.png",
+      "path": "data/images/invoice_04.png",
+      "kind": "image",
+      "family": "invoice",
+      "pii": {
+        "person_name": "Lukas Hartmann",
+        "project_ref": "HELIOS-X",
+        "customer_id": "C-92003",
+        "email": "lukas.hartmann.03@examplemail.de",
+        "iban": "DEOO 0000 0000 0003 1203 00",
+        "address": "ParkstraBe 11, 60311 Frankfurt"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Edge Controller - EUR 5,100.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DEOO 0000 0000 0003 1203 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Lukas Hartmann",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "invoice_05.png",
+      "path": "data/images/invoice_05.png",
+      "kind": "image",
+      "family": "invoice",
+      "pii": {
+        "person_name": "Sophie Keller",
+        "project_ref": "MERIDIAN-12",
+        "customer_id": "C-92004",
+        "email": "keller.04@examplemail.de",
+        "iban": "DEOO 0000 0000 0004 1204 00",
+        "address": "Bergweg 23, 90402 Nurnberg"
+      },
+      "tasks": [
+        {
+          "question": "Which item has the highest price?",
+          "expected_answer": "Actuator Unit - EUR 3,875.00",
+          "requires": []
+        },
+        {
+          "question": "What IBAN should this invoice be paid to?",
+          "expected_answer": "DEOO 0000 0000 0004 1204 00",
+          "requires": [
+            "iban"
+          ]
+        },
+        {
+          "question": "Who is the invoice addressed to?",
+          "expected_answer": "Sophie Keller",
+          "requires": [
+            "person_name"
+          ]
+        }
+      ]
+    }
+  ]
+}
