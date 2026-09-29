@@ -1,7 +1,7 @@
 # ContextGuard
 
 A **task-aware multimodal privacy layer for AI agents.** A downstream agent gets a
-redacted copy of your documents containing exactly what its task requires — and
+redacted copy of your documents containing exactly what its task requires - and
 nothing else.
 
 The same invoice, two questions:
