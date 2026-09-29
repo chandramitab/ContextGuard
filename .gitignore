@@ -42,3 +42,6 @@ sessions/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local tool permissions — machine-specific, not shared config
+.claude/settings.local.json
